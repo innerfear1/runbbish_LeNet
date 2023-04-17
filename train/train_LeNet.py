@@ -14,6 +14,8 @@ from model.LeNet import LeNet
 import matplotlib.pyplot as plt
 import numpy as np
 
+import pandas as pd
+
 # 设置画图的字体样式
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
@@ -81,13 +83,13 @@ def main():
     # 损失函数使用交叉熵损失函数
     loss_function = nn.CrossEntropyLoss()
     # 优化器选择Adam优化器，学习率为0.0001
-    optimizer = optim.Adam(model_LeNet.parameters(),lr=0.001)
+    optimizer = optim.Adam(model_LeNet.parameters(),lr=0.01)
     # 定义训练轮数
-    epochs = 4 
+    epochs = 100
     # 基础准确率为0
     best_acc = 0.0
     # 训练结束的模型参数结果保存位置
-    save_path = 'pth/LeNet.pth'
+    save_path = 'pth/LeNet_0.01.pth'
     # 定义画图对应的LeNet网络的准确率和损失
     LeNet_loss = []
     LeNet_acc = []
@@ -181,6 +183,13 @@ def main():
     ax.set_title('LeNet', fontsize = 18)
     # 展示画出的图
     plt.show()
+    print('show_finished')
+    
+    # 训练数据保存到data_train.xlsx中
+    df = pd.read_excel('./data_train.xlsx')
+    df['LeNet_loss_0.01'], df['LeNet_acc_0.01'] = LeNet_loss, LeNet_acc
+    df.to_excel('./data_train.xlsx', index=None)
+    print('write_finished')
 
 
 if __name__ == '__main__':

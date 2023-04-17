@@ -12,6 +12,7 @@ class AlexNet(nn.Module):
                                kernel_size=11,
                                stride=4,
                                padding=0)
+        # self.LRN1 = nn.LocalResponseNorm(size=5, alpha=0.0001, beta=0.75, k=2)
         self.pool1 = nn.MaxPool2d(kernel_size=3,stride=2)
         # input为27*27*96 256个卷积核5*5*96
         self.conv2 = nn.Conv2d(in_channels=96,
@@ -19,6 +20,7 @@ class AlexNet(nn.Module):
                                kernel_size=5,
                                stride=1,
                                padding=2)
+        # self.LRN2 = nn.LocalResponseNorm(size=5, alpha=0.0001, beta=0.75, k=2)
         self.pool2 = nn.MaxPool2d(kernel_size=3,stride=2)
         # input为13*13*256 384个卷积核3*3*256
         self.conv3 = nn.Conv2d(in_channels=256,
@@ -39,20 +41,24 @@ class AlexNet(nn.Module):
                                stride=1,
                                padding=1)
         self.pool5 = nn.MaxPool2d(kernel_size=3,stride=2)
-        # input为6*6*256 
+        
+        # input为6*6*256
+        self.fc_drop = nn.Dropout(0.2)
         self.fc1 = nn.Linear(256*6*6, 4096)
-        self.fc1_drop = nn.Dropout(0.5)
+        self.fc1_drop = nn.Dropout(0.2)
         self.fc2 = nn.Linear(4096, 4096)
-        self.fc2_drop = nn.Dropout(0.5)
+        
         self.fc3 = nn.Linear(4096, 4)
 
 
     def forward(self,x):
         x = x.cuda()
         x = F.relu(self.conv1(x))
+        # x = self.LRN1(x)
         x = self.pool1(x)
 
         x = F.relu(self.conv2(x))
+        # x = self.LRN2(x)
         x = self.pool2(x)
 
         x = F.relu(self.conv3(x))
@@ -63,10 +69,10 @@ class AlexNet(nn.Module):
 
         x = torch.flatten(x,start_dim=1)
         
+        x = self.fc_drop(x)
         x = F.relu(self.fc1(x))
         x = self.fc1_drop(x)
         x = F.relu(self.fc2(x))
-        x = self.fc2_drop(x)
         x = self.fc3(x)
 
         return x

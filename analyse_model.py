@@ -49,7 +49,7 @@ def draw_LeNet_loss_acc():
                                 linestyle = ":",
                                 markersize = 4,
                                 marker = 'x',
-                                label = 'LeNet_lr=0.001_acc')
+                                label = 'LeNet_lr=0.01_acc')
     
     # lr=0.001时的loss折线图画出来
     LeNet_loss_vs_001, = ax_LeNet_loss.plot(epoch_ls,
@@ -122,7 +122,7 @@ def draw_AlexNet_loss_acc():
                                 linestyle = ":",
                                 markersize = 4,
                                 marker = 'x',
-                                label = 'LeNet_SGD_acc')
+                                label = 'AlexNet_SGD_acc')
     
     # optim=Adam时的loss折线图画出来
     LeNet_loss_vs_Adam, = ax_ALexNet_loss.plot(epoch_ls,
@@ -132,7 +132,7 @@ def draw_AlexNet_loss_acc():
                                 linestyle = ":",
                                 markersize = 4,
                                 marker = 'x',
-                                label = 'LeNet_Adam_loss')
+                                label = 'ALexNet_Adam_loss')
     
     # optim=SGD时的loss折线图画出来
     LeNet_loss_vs_SGD, = ax_ALexNet_loss.plot(epoch_ls,
@@ -142,7 +142,7 @@ def draw_AlexNet_loss_acc():
                                 linestyle = ":",
                                 markersize = 4,
                                 marker = 'x',
-                                label = 'LeNet_SGD_loss')
+                                label = 'AlexNet_SGD_loss')
     
     # 
     ax_AlexNet_acc.legend(frameon = False)
@@ -346,6 +346,7 @@ if __name__ == '__main__':
         draw_VGG16Net_loss_acc()
         
     elif input1 == 'All':
-        draw_AlexNet_loss_acc()
+        draw_LeNet_loss_acc()
         draw_AlexNet_loss_acc()
         draw_VGG16Net_loss_acc()
+        LeNet_AlexNet_VGG16Net_acc_loss()

@@ -13,7 +13,7 @@ from tkinter import filedialog   #导入文件对话框函数库
 
 # 创建窗口 设定大小并命名
 window = tk.Tk()
-window.title('图像显示界面')
+window.title('生活垃圾识别')
 window.geometry('600x500')
 global img_png           # 定义全局变量 图像的
 var = tk.StringVar()    # 这时文字变量储存器

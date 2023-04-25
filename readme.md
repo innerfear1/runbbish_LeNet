@@ -212,7 +212,7 @@ self.layer1 = nn.Sequential(
 
 下图是迭代训练100轮后的acc与loss曲线图
 
-![](loss_acc_jpg/LeNet_100_0.01_loss_acc.jpg)
+
 
 ### AlexNet网络结构
 
@@ -229,14 +229,14 @@ self.layer1 = nn.Sequential(
 | conv2+maxpool2 |  (27,27,96)   | (5,5,256),1 p=2 | (3,3),1 | (13,13,256) |
 |     conv3      |  (13,13,256)  | (3,3,384),1 p=1 | NULL | (13,13,384) |
 |     conv4      |  (13,13,384)  | (3,3,384),1 p=1 | NULL | (13,13,384) |
-| conv5+maxpool5 |  (13,13,384)  | (3,3,256),1 p=1 | (6,6,256) |
+| conv5+maxpool5 |  (13,13,384)  | (3,3,256),1 p=1 | (3,3),2 | (6,6,256) |
 |    fc1+drop    | ((6,6,256),1) |      4096       |  NULL   |  (4096，1）   |
 |    fc2+drop    |   (4096,1)    |      4096       |  NULL   |  (4096,1)   |
 |      fc3       |   (4096,1)    |        4        |  NULL   |    (4,1)    |
 
 下图是迭代训练100轮后的acc与loss曲线图
 
-![](loss_acc_jpg/AlexNet_100_0.001_SGD_loss_acc.jpg)
+
 
 ### VGG16Net的网络结构
 

@@ -83,7 +83,7 @@ def main():
     # 损失函数使用交叉熵损失函数
     loss_function = nn.CrossEntropyLoss()
     # 优化器选择Adam优化器，学习率为0.0001
-    optimizer = optim.Adam(model_LeNet.parameters(),lr=0.01)
+    optimizer = optim.Adam(model_LeNet.parameters(),lr=0.1)
     # 定义训练轮数
     epochs = 100
     # 基础准确率为0

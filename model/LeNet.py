@@ -9,7 +9,7 @@ class LeNet(nn.Module):
         # （224，224，3）    （5，5，6）
         self.conv1 = nn.Conv2d(in_channels=3,out_channels=6,kernel_size=5)
         self.pool1 = nn.MaxPool2d(kernel_size=2,stride=2)
-        # （）     （5，5，16）
+        # （112，112，6）     （5，5，16）
         self.conv2 = nn.Conv2d(in_channels=6,out_channels=16,kernel_size=5)
         self.pool2 = nn.MaxPool2d(kernel_size=2,stride=2)
         
@@ -18,7 +18,7 @@ class LeNet(nn.Module):
         self.fc2 = nn.Linear(120,84)
         self.fc3 = nn.Linear(84,4)
 
-
+    # 前向传播
     def forward(self,x):
         x = x.cuda()
         x = F.relu(self.conv1(x))
